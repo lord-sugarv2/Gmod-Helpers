@@ -5,7 +5,7 @@ Looking into turning this into a UI library so if anyone wants to contribute go 
 
 
 An Example on how you can use this
-<p>
+***
 local frame = vgui.Create("DFrame")
 frame:SetSize(800, 800)
 frame:Center()
@@ -18,4 +18,4 @@ for i = 1, 15 do
     local button = vgui.Create("DButton")
     panel:AddItem(button, math.random(30, 80), math.random(30, 80), math.random(-500, 600), math.random(-500, 1000)) 
 end
-</p>
+***
