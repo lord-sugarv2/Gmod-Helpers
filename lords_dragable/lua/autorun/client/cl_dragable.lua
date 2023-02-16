@@ -65,7 +65,7 @@ function PANEL:UpdatePanels()
 end
 
 function PANEL:PerformLayout(w, h)
-    self.Diff = self.Diff or Vector(0, 0)
+    self.Diff = self.Diff or Vector(w, h) *.5
 
     local scale = self:GetScale()
     for k, panel in ipairs(self.Panels) do
@@ -99,7 +99,7 @@ function PANEL:OnMouseReleased(key)
 end
 
 function PANEL:Think()
-    if self.ShouldDrag then
+    if self.ShouldDrag and input.IsMouseDown(MOUSE_LEFT) then
         local newpos = Vector(gui.MouseX(), gui.MouseY())
         self.Diff = self.Diff + (newpos - self.DragPos)
         self.DragPos = newpos
@@ -123,3 +123,17 @@ function PANEL:Paint(w, h)
     surface.DrawRect(0, 0, w, h)
 end
 vgui.Register("LordsUI:MoveableTree", PANEL, "EditablePanel")
+
+if IsValid(frame) then frame:Remove() end
+frame = vgui.Create("DFrame")
+frame:SetSize(800, 800)
+frame:Center()
+frame:MakePopup()
+
+local panel = frame:Add("LordsUI:MoveableTree")
+panel:Dock(FILL)
+
+for i = 1, 15 do
+    local button = vgui.Create("DButton")
+    panel:AddItem(button, math.random(30, 80), math.random(30, 80), math.random(-500, 600), math.random(-500, 1000)) 
+end
