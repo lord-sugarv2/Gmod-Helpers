@@ -106,6 +106,9 @@ hook.Add("Think", "LordsUI:Areas", function()
 end)
 
 --[[
+
+-- Example of use is clan capture points / make people wanted when they go into a certain area
+
 local pos1 = Vector(-3293.659912, -2068.002686, 47.968750)
 local pos2 = Vector(-2954.133057, -1164.360474, -195.968750)
 LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
