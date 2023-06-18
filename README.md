@@ -28,21 +28,21 @@ An Example on how you can use this
 ![image](https://github.com/lord-sugarv2/Gmod-Helpers/assets/62381889/3fa551e0-9950-4f4c-97a0-2c150089eec1)
 
 ***
-local pos1 = Vector(-3293.659912, -2068.002686, 47.968750)
-local pos2 = Vector(-2954.133057, -1164.360474, -195.968750)
-LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "ENTERED THE BANK")
-end)
-
-LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "LEFT THE BANK")
-end)
-
-LordsUI:WhileInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "IS IN THE BANK")
-end)
-
-LordsUI:WhileNotInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "IS NOT IN THE BANK")
-end)
+    local pos1 = Vector(-3293.659912, -2068.002686, 47.968750)
+    local pos2 = Vector(-2954.133057, -1164.360474, -195.968750)
+    LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "ENTERED THE BANK")
+    end)
+    
+    LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "LEFT THE BANK")
+    end)
+    
+    LordsUI:WhileInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "IS IN THE BANK")
+    end)
+    
+    LordsUI:WhileNotInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "IS NOT IN THE BANK")
+    end)
 ***
