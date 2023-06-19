@@ -138,3 +138,5 @@ hook.Add("Think", "LordsUI:Areas", function()
         end
     end
 end)
+
+hook.Run("LordsUI:AreasLoaded")
