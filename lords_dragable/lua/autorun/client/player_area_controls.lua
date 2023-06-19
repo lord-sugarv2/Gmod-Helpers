@@ -17,13 +17,22 @@ function LordsUI:IsInArea(ply, cornerOne, cornerTwo)
     return IsPlayerBetweenPoints(ply, cornerOne, cornerTwo)
 end
 
-LordsUI.Areas = {}
-LordsUI.Players = {}
+LordsUI.Areas = LordsUI.Areas or {}
+LordsUI.Players = LordsUI.Players or {}
 
-function LordsUI:OnEnterArea(cornerOne, cornerTwo, func)
+function LordsUI:OnEnterArea(cornerOne, cornerTwo, func, mainID)
     func = func or function() end
+    mainID = mainID or math.random(1, 999999)
+
+    for k, v in ipairs(LordsUI.Areas) do
+        if v.mainID == mainID then
+            table.remove(LordsUI.Areas, k)
+            break
+        end
+    end
 
     table.Add(LordsUI.Areas, {{
+        mainID = mainID,
         id = tostring(cornerOne + cornerTwo),
         cornerOne = cornerOne,
         cornerTwo = cornerTwo,
@@ -32,10 +41,19 @@ function LordsUI:OnEnterArea(cornerOne, cornerTwo, func)
     }})
 end
 
-function LordsUI:OnExitArea(cornerOne, cornerTwo, func)
+function LordsUI:OnExitArea(cornerOne, cornerTwo, func, mainID)
     func = func or function() end
+    mainID = mainID or math.random(1, 999999)
+
+    for k, v in ipairs(LordsUI.Areas) do
+        if v.mainID == mainID then
+            table.remove(LordsUI.Areas, k)
+            break
+        end
+    end
 
     table.Add(LordsUI.Areas, {{
+        mainID = mainID,
         id = tostring(cornerOne + cornerTwo),
         cornerOne = cornerOne,
         cornerTwo = cornerTwo,
@@ -44,10 +62,19 @@ function LordsUI:OnExitArea(cornerOne, cornerTwo, func)
     }})
 end
 
-function LordsUI:WhileInArea(cornerOne, cornerTwo, func)
+function LordsUI:WhileInArea(cornerOne, cornerTwo, func, mainID)
     func = func or function() end
+    mainID = mainID or math.random(1, 999999)
+
+    for k, v in ipairs(LordsUI.Areas) do
+        if v.mainID == mainID then
+            table.remove(LordsUI.Areas, k)
+            break
+        end
+    end
 
     table.Add(LordsUI.Areas, {{
+        mainID = mainID,
         id = tostring(cornerOne + cornerTwo),
         cornerOne = cornerOne,
         cornerTwo = cornerTwo,
@@ -56,10 +83,19 @@ function LordsUI:WhileInArea(cornerOne, cornerTwo, func)
     }})
 end
 
-function LordsUI:WhileNotInArea(cornerOne, cornerTwo, func)
+function LordsUI:WhileNotInArea(cornerOne, cornerTwo, func, mainID)
     func = func or function() end
+    mainID = mainID or math.random(1, 999999)
+
+    for k, v in ipairs(LordsUI.Areas) do
+        if v.mainID == mainID then
+            table.remove(LordsUI.Areas, k)
+            break
+        end
+    end
 
     table.Add(LordsUI.Areas, {{
+        mainID = mainID,
         id = tostring(cornerOne + cornerTwo),
         cornerOne = cornerOne,
         cornerTwo = cornerTwo,
@@ -104,26 +140,3 @@ hook.Add("Think", "LordsUI:Areas", function()
         end
     end
 end)
-
---[[
-
--- Example of use is clan capture points / make people wanted when they go into a certain area
-
-local pos1 = Vector(-3293.659912, -2068.002686, 47.968750)
-local pos2 = Vector(-2954.133057, -1164.360474, -195.968750)
-LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "ENTERED THE BANK")
-end)
-
-LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "LEFT THE BANK")
-end)
-
-LordsUI:WhileInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "IS IN THE BANK")
-end)
-
-LordsUI:WhileNotInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
-    print(ply, "IS NOT IN THE BANK")
-end)
---]]
