@@ -106,26 +106,25 @@ end
 
 local function InArea(ply, data)
     if data.type == "OnEnter" and not LordsUI.Players[ply][data.id] then
-        LordsUI.Players[ply][data.id] = true
         data.func(ply, data.cornerOne, data.cornerTwo)
     end
 
     if data.type == "WhileIn" then
-        LordsUI.Players[ply][data.id] = true
         data.func(ply, data.cornerOne, data.cornerTwo)
     end
+    LordsUI.Players[ply][data.id] = true
 end
 
 local function NotInArea(ply, data)
     if data.type == "OnExit" and LordsUI.Players[ply][data.id] then
-        LordsUI.Players[ply][data.id] = false
         data.func(ply, data.cornerOne, data.cornerTwo)
     end
 
     if data.type == "WhileNotIn" and not LordsUI.Players[ply][data.id] then
-        LordsUI.Players[ply][data.id] = false
         data.func(ply, data.cornerOne, data.cornerTwo)
     end
+
+    LordsUI.Players[ply][data.id] = false
 end
 
 hook.Add("Think", "LordsUI:Areas", function()
