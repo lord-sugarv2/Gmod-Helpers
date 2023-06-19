@@ -1,3 +1,6 @@
+-- if u really want u can make this file shared and have it run on the client
+-- but idk if this is good idea cuz calling this on average 200fps player will 
+-- run the high calculations 200 times/s
 LordsUI = LordsUI or {}
 
 local function IsPlayerBetweenPoints(ply, pointA, pointB)
