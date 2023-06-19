@@ -1,6 +1,3 @@
--- if u really want u can make this file shared and have it run on the client
--- but idk if this is good idea cuz calling this on average 200fps player will 
--- run the high calculations 200 times/s
 LordsUI = LordsUI or {}
 
 local function IsPlayerBetweenPoints(ply, pointA, pointB)
@@ -110,24 +107,23 @@ end
 local function InArea(ply, data)
     if data.type == "OnEnter" and not LordsUI.Players[ply][data.id] then
         data.func(ply, data.cornerOne, data.cornerTwo)
+        LordsUI.Players[ply][data.id] = true
     end
 
     if data.type == "WhileIn" then
         data.func(ply, data.cornerOne, data.cornerTwo)
     end
-    LordsUI.Players[ply][data.id] = true
 end
 
 local function NotInArea(ply, data)
     if data.type == "OnExit" and LordsUI.Players[ply][data.id] then
         data.func(ply, data.cornerOne, data.cornerTwo)
+        LordsUI.Players[ply][data.id] = false
     end
 
     if data.type == "WhileNotIn" and not LordsUI.Players[ply][data.id] then
         data.func(ply, data.cornerOne, data.cornerTwo)
     end
-
-    LordsUI.Players[ply][data.id] = false
 end
 
 hook.Add("Think", "LordsUI:Areas", function()
