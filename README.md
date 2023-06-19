@@ -28,21 +28,22 @@ An Example on how you can use this
 ![image](https://github.com/lord-sugarv2/Gmod-Helpers/assets/62381889/3fa551e0-9950-4f4c-97a0-2c150089eec1)
 
 ***
+    -- the mainID is used to make the area not duplicate over lua refresh
     local pos1 = Vector(-3293.659912, -2068.002686, 47.968750)
     local pos2 = Vector(-2954.133057, -1164.360474, -195.968750)
     LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
         print(ply, "ENTERED THE BANK")
-    end)
+    end, "mainID")
     
     LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
         print(ply, "LEFT THE BANK")
-    end)
+    end, "mainID")
     
     LordsUI:WhileInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
         print(ply, "IS IN THE BANK")
-    end)
+    end, "mainID")
     
     LordsUI:WhileNotInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
         print(ply, "IS NOT IN THE BANK")
-    end)
+    end, "mainID")
 ***
