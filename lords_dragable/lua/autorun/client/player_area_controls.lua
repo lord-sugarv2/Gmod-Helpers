@@ -130,7 +130,7 @@ hook.Add("Think", "LordsUI:Areas", function()
     for _, data in ipairs(LordsUI.Areas) do
         for _, ply in ipairs(player.GetAll()) do
             LordsUI.Players[ply] = LordsUI.Players[ply] or {}
-            if LordsUI:IsInArea(ply, data.cornerOne, data.cornerTwo) then
+            if LordsUI:IsInArea(ply, data.cornerOne, data.cornerTwo) and ply:Alive() then
                 InArea(ply, data)
             else
                 NotInArea(ply, data)
@@ -138,5 +138,15 @@ hook.Add("Think", "LordsUI:Areas", function()
         end
     end
 end)
+
+function LordsUI:PlayersWithinDistance(pos, dist)
+    local distSqr = dist * dist
+    local tbl = {}
+    for k, ply in ipairs(player.GetAll()) do
+        if ply:GetPos():DistToSqr(pos) > distSqr then continue end
+        table.insert(tbl, ply)
+    end
+	return tbl
+end
 
 hook.Run("LordsUI:AreasLoaded")
