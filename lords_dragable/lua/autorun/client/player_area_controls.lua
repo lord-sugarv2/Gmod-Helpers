@@ -20,6 +20,20 @@ end
 LordsUI.Areas = LordsUI.Areas or {}
 LordsUI.Players = LordsUI.Players or {}
 
+function LordsUI:IsInID(ply, id)
+    for _, data in ipairs(LordsUI.Areas) do
+        if data.mainID ~= id then continue end
+        return LordsUI:IsInArea(ply, data.cornerOne, data.cornerTwo)
+    end
+end
+
+function LordsUI:GetIDData(ply, id)
+    for _, data in ipairs(LordsUI.Areas) do
+        if data.mainID ~= id then continue end
+        return data
+    end
+end
+
 function LordsUI:OnEnterArea(cornerOne, cornerTwo, func, mainID)
     func = func or function() end
     mainID = mainID or math.random(1, 999999)
@@ -104,8 +118,31 @@ function LordsUI:WhileNotInArea(cornerOne, cornerTwo, func, mainID)
     }})
 end
 
+function LordsUI:JoinAreas(idOne, idTwo)
+    local areaOne = 0
+    local areaTwo = 0
+    for k, v in ipairs(LordsUI.Areas) do
+        if v.mainID == idOne then
+            areaOne = k
+        end
+    
+        if v.mainID == idTwo then
+            areaTwo = k
+        end
+    end
+
+    if areaOne == 0 or areaTwo == 0 then return end
+    LordsUI.Areas[areaOne].Joined = idTwo
+    LordsUI.Areas[areaTwo].Joined = idOne
+end
+
 local function InArea(ply, data)
     if data.type == "OnEnter" and not LordsUI.Players[ply][data.id] then
+        if data.Joined and LordsUI:IsInID(ply, data.Joined) then
+            LordsUI.Players[ply][data.id] = true
+            return
+        end
+    
         data.func(ply, data.cornerOne, data.cornerTwo)
         LordsUI.Players[ply][data.id] = true
     end
@@ -116,9 +153,16 @@ local function InArea(ply, data)
 end
 
 local function NotInArea(ply, data)
+    if data.Joined and LordsUI:IsInID(ply, data.Joined) then
+        return
+    end
+
     if data.type == "OnExit" and LordsUI.Players[ply][data.id] then
         data.func(ply, data.cornerOne, data.cornerTwo)
         LordsUI.Players[ply][data.id] = false
+        if data.Joined then
+            LordsUI.Players[ply][LordsUI:GetIDData(ply, data.Joined).id] = false
+        end
     end
 
     if data.type == "WhileNotIn" and not LordsUI.Players[ply][data.id] then
