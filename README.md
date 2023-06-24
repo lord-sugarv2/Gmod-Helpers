@@ -29,6 +29,8 @@ An Example on how you can use this
 
 ***
     -- the mainID is used to make the area not duplicate over lua refresh
+    -- please do not make any mainID the same
+
     local pos1 = Vector(-3293.659912, -2068.002686, 47.968750)
     local pos2 = Vector(-2954.133057, -1164.360474, -195.968750)
     LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
@@ -46,4 +48,23 @@ An Example on how you can use this
     LordsUI:WhileNotInArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
         print(ply, "IS NOT IN THE BANK")
     end, "mainID")
+
+    -- This is how you join two areas if the areas overlap and you enter the other it wont be called
+    LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "Entered The Room")
+    end, "mainIDOne")
+
+    LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo) 
+        print(ply, "Entered The Room")
+    end, "mainIDTwo")
+    LordsUI:JoinAreas("MainIDOne", "MainIDTwo")
+
+    -- NOTE OnExitArea will only be called when u fully leave both boxes so if your boxes are overlapped on join one of these wont get called
+    LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "Left The Room")
+    end, "RoomOneE")
+    LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+        print(ply, "Left The Room")
+    end, "RoomTwoE")
+    LordsUI:JoinAreas("RoomOneE", "RoomTwoE")
 ***
