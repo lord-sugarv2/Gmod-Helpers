@@ -54,7 +54,7 @@ An Example on how you can use this
         print(ply, "Entered The Room")
     end, "mainIDOne")
 
-    LordsUI:OnEnterArea(pos1, pos2, function(ply, cornerOne, cornerTwo) 
+    LordsUI:OnEnterArea(pos3, pos4, function(ply, cornerOne, cornerTwo) 
         print(ply, "Entered The Room")
     end, "mainIDTwo")
     LordsUI:JoinAreas("MainIDOne", "MainIDTwo")
@@ -63,7 +63,7 @@ An Example on how you can use this
     LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
         print(ply, "Left The Room")
     end, "RoomOneE")
-    LordsUI:OnExitArea(pos1, pos2, function(ply, cornerOne, cornerTwo)
+    LordsUI:OnExitArea(pos3, pos4, function(ply, cornerOne, cornerTwo)
         print(ply, "Left The Room")
     end, "RoomTwoE")
     LordsUI:JoinAreas("RoomOneE", "RoomTwoE")
