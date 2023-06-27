@@ -227,4 +227,13 @@ function LordsUI:PlayersWithinDistance(pos, dist)
 	return tbl
 end
 
+function LordsUI:RemoveArea(mainID)
+    for k, v in ipairs(LordsUI.Areas) do
+        if v.mainID == mainID then
+            table.remove(LordsUI.Areas, k)
+            break
+        end
+    end
+end
+
 hook.Run("LordsUI:AreasLoaded")
